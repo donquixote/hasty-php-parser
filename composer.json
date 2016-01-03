@@ -1,0 +1,32 @@
+{
+  "name": "donquixote/hasty-php-parser",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andreas Hennings",
+      "email": "andreas@dqxtech.net"
+    }
+  ],
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/donquixote/hasty-php-ast"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "donquixote/hasty-php-ast": "~0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Donquixote\\HastyPhpParser\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Donquixote\\HastyPhpParser\\Tests\\": "tests/src",
+      "Donquixote\\HastyPhpAst\\": "../hasty-php-ast/src"
+    }
+  }
+}
