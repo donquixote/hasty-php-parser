@@ -2,6 +2,9 @@
 
 namespace Donquixote\HastyPhpParser\Tests;
 
+use Donquixote\HastyPhpAst\Ast\ClassLike\AstClassLike;
+use Donquixote\HastyPhpAst\Ast\ClassLike\AstClassLikeInterface;
+use Donquixote\HastyPhpAst\Ast\File\AstFileInterface;
 use Donquixote\HastyPhpAst\PhpToAst\PhpToAstInterface;
 use Donquixote\HastyPhpParser\PhpToAst\PhpToAst_Parser;
 
@@ -10,16 +13,39 @@ class PhpToAstTest extends \PHPUnit_Framework_TestCase {
   /**
    * @param \Donquixote\HastyPhpAst\PhpToAst\PhpToAstInterface $phpToAst
    * @param string $class
-   * @param string $export
    *
    * @dataProvider providerPhpToAst
    */
-  function testPhpToAst(PhpToAstInterface $phpToAst, $class, $export) {
+  function testPhpToAst(PhpToAstInterface $phpToAst, $class) {
     $reflectionClass = new \ReflectionClass($class);
     $file = $reflectionClass->getFileName();
     $php = file_get_contents($file);
     $fileAst = $phpToAst->phpGetAst($php);
-    $this->assertEquals($export, var_export($fileAst, TRUE));
+
+    $classNodes = $this->fileAstGetClassNodes($fileAst);
+
+    $this->assertEquals(array(0), array_keys($classNodes));
+
+    $classNode = $classNodes[0];
+
+    $this->assertEquals($reflectionClass->getShortName(), $classNode->getShortName());
+
+    $this->assertEquals($reflectionClass->getDocComment(), $classNode->getDocComment());
+  }
+
+  /**
+   * @param \Donquixote\HastyPhpAst\Ast\File\AstFileInterface $astFile
+   *
+   * @return \Donquixote\HastyPhpAst\Ast\ClassLike\AstClassLikeInterface[]
+   */
+  private function fileAstGetClassNodes(AstFileInterface $astFile) {
+    $classNodes = array();
+    foreach ($astFile->getNodes() as $astNode) {
+      if ($astNode instanceof AstClassLikeInterface) {
+        $classNodes[] = $astNode;
+      }
+    }
+    return $classNodes;
   }
 
   /**
@@ -27,24 +53,16 @@ class PhpToAstTest extends \PHPUnit_Framework_TestCase {
    */
   function providerPhpToAst() {
     $list = array();
-    $classes = array();
-    foreach (scandir($dir = dirname(__DIR__) . '/fixtures') as $candidate) {
-      if ('.' === $candidate[0]) {
-        continue;
-      }
-      $fragments = explode('.', $candidate);
-      $ext = array_pop($fragments);
-      if ('txt' !== $ext) {
-        continue;
-      }
-      $classes[implode('\\', $fragments)] = file_get_contents($dir . '/' . $candidate);
-    }
+    $classes = array(
+      AstClassLike::class,
+      AstClassLikeInterface::class,
+    );
     foreach (array(
       PhpToAst_Parser::create(TRUE),
-      PhpToAst_Parser::create(FALSE)
+      PhpToAst_Parser::create(FALSE),
     ) as $phpToAst) {
-      foreach ($classes as $class => $export) {
-        $list[] = array($phpToAst, $class, $export);
+      foreach ($classes as $class) {
+        $list[] = array($phpToAst, $class);
       }
     }
     return $list;

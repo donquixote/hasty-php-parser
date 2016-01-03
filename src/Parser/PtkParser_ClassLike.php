@@ -54,28 +54,27 @@ class PtkParser_ClassLike implements DeclarationParserInterface {
    * @see token_get_all()
    */
   function parse(array $tokens, &$iParent, array $modifiers = array(), $docComment = NULL) {
-    $type = $tokens[$iParent][0];
     $i = $iParent;
     $id = ParserUtil::nextSubstantialExcl($tokens, $i);
     if (T_STRING !== $id) {
       return FALSE;
     }
-    $name = $tokens[$i][1];
+    $shortName = $tokens[$i][1];
     $id = ParserUtil::nextSubstantialExcl($tokens, $i);
-    $extends = array();
+    $extendsAliases = array();
     if (T_EXTENDS === $id) {
       ++$i;
-      $extends = ParserUtil::parseIdentifierList($tokens, $i);
-      if (FALSE === $extends) {
+      $extendsAliases = ParserUtil::parseIdentifierList($tokens, $i);
+      if (FALSE === $extendsAliases) {
         return FALSE;
       }
       $id = ParserUtil::nextSubstantialIncl($tokens, $i);
     }
-    $implements = array();
+    $implementsAliases = array();
     if (T_IMPLEMENTS === $id) {
       ++$i;
-      $implements = ParserUtil::parseIdentifierList($tokens, $i);
-      if (FALSE === $implements) {
+      $implementsAliases = ParserUtil::parseIdentifierList($tokens, $i);
+      if (FALSE === $implementsAliases) {
         return FALSE;
       }
       $id = ParserUtil::nextSubstantialIncl($tokens, $i);
@@ -88,15 +87,6 @@ class PtkParser_ClassLike implements DeclarationParserInterface {
       return FALSE;
     }
     $iParent = $i;
-    if (T_CLASS === $type) {
-      $parentClassName = isset($extends[0]) ? $extends[0] : NULL;
-      return new AstClassLike($docComment, $modifiers, $name, $parentClassName, $implements, $body);
-    }
-    elseif (T_INTERFACE === $type) {
-      return new AstClassLike($docComment, $modifiers, $name, NULL, $extends, $body);
-    }
-    else {
-      return new AstClassLike($docComment, $modifiers, $name, NULL, array(), $body);
-    }
+    return new AstClassLike($docComment, $modifiers, $shortName, $extendsAliases, $implementsAliases, $body);
   }
 }

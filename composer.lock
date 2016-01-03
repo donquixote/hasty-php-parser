@@ -4,9 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8d83b5b9c1d01bcf3e38f9968f002ba9",
-    "content-hash": "e7ef74280f21d0331771126d7c0da6d8",
-    "packages": [],
+    "hash": "2f34fb34e203616e3761d9254846f423",
+    "content-hash": "fccd44e7ae1e6fe89aefc03f1f4424fa",
+    "packages": [
+        {
+            "name": "donquixote/hasty-php-ast",
+            "version": "v0.0.0-alpha.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/donquixote/hasty-php-ast.git",
+                "reference": "dc070472a6e20783b20b8281379b43b24eb2573e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/donquixote/hasty-php-ast/zipball/dc070472a6e20783b20b8281379b43b24eb2573e",
+                "reference": "dc070472a6e20783b20b8281379b43b24eb2573e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Donquixote\\HastyPhpAst\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Donquixote\\HastyPhpAst\\Tests\\": "tests/src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Hennings",
+                    "email": "andreas@dqxtech.net"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/donquixote/hasty-php-ast/tree/v0.0.0-alpha.1",
+                "issues": "https://github.com/donquixote/hasty-php-ast/issues"
+            },
+            "time": "2016-01-03 06:17:52"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
