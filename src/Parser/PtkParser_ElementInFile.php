@@ -164,7 +164,7 @@ class PtkParser_ElementInFile implements PtkParserInterface {
       elseif ('#' === $token) {
         return FALSE;
       }
-    };
+    }
 
     return FALSE;
   }

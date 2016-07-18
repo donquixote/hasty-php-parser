@@ -204,7 +204,7 @@ class PtkParser_ClassMember implements PtkParserInterface {
       elseif ('#' === $token) {
         return FALSE;
       }
-    };
+    }
 
     return FALSE;
   }
