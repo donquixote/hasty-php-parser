@@ -120,7 +120,7 @@ final class ParserUtil extends UtilBase {
           return NULL;
         }
       }
-      elseif ('{' === $token) {
+      elseif ('{' === $token || T_CURLY_OPEN === $token[0] || T_DOLLAR_OPEN_CURLY_BRACES === $token[0]) {
         ++$level;
       }
       elseif ('#' === $token) {
