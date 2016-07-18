@@ -33,7 +33,7 @@ class PtkParser_File implements PtkParserInterface {
    * @param array $tokens
    * @param int $i
    *
-   * @return \Donquixote\HastyPhpAst\Ast\File\AstFileInterface
+   * @return \Donquixote\HastyPhpAst\Ast\File\AstFileInterface|false
    */
   function parse(array $tokens, &$i) {
 

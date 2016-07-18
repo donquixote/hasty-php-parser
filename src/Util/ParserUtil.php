@@ -156,7 +156,7 @@ final class ParserUtil extends UtilBase {
    * @param mixed[] $tokens
    * @param int $i
    *
-   * @return array|bool
+   * @return \Donquixote\HastyPhpAst\Ast\Use_\AstUseStatement|false
    */
   static function parseUseStatementGroup(array $tokens, &$i) {
     $fqcnsByAlias = array();

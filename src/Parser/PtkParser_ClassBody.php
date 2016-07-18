@@ -34,7 +34,7 @@ class PtkParser_ClassBody implements PtkParserInterface {
    *   After (success): Position after the closing '}'.
    *   After (failure): Same as before.
    *
-   * @return \Donquixote\HastyPhpAst\Ast\ClassLikeBody\AstClassLikeBodyInterface
+   * @return \Donquixote\HastyPhpAst\Ast\ClassLikeBody\AstClassLikeBodyInterface|false
    */
   function parse(array $tokens, &$i) {
     $iStart = $i;

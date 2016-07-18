@@ -108,7 +108,7 @@ class PtkParser_ClassMember implements PtkParserInterface {
    *   After (success): Position after the closing ';' or '}'.
    *   After (failure): Random position.
    *
-   * @return bool|null
+   * @return \Donquixote\HastyPhpAst\Ast\UseTrait\AstUseTrait|false
    */
   static function parseUseTrait(array $tokens, &$i) {
     ++$i;
