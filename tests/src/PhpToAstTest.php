@@ -61,11 +61,11 @@ class PhpToAstTest extends \PHPUnit_Framework_TestCase {
       AstClassLikeInterface::class,
     );
     foreach (array(
-      PhpToAst_Parser::create(TRUE),
-      PhpToAst_Parser::create(FALSE),
-    ) as $phpToAst) {
+      'lazy' => PhpToAst_Parser::create(TRUE),
+      'non-lazy' => PhpToAst_Parser::create(FALSE),
+    ) as $lazy_str => $phpToAst) {
       foreach ($classes as $class) {
-        $list[] = array($phpToAst, $class);
+        $list[$lazy_str . ' ' . $class] = array($phpToAst, $class);
       }
     }
     return $list;
