@@ -78,7 +78,7 @@ final class ParserUtil extends UtilBase {
    *   After (success): Position after the closing '}'.
    *   After (failure): Random position.
    *
-   * @return bool
+   * @return null|false
    */
   static function skipCurvy(array $tokens, &$i) {
     $level = 0;
@@ -108,7 +108,7 @@ final class ParserUtil extends UtilBase {
    *   After (success): Position after '}'.
    *   After (Failure): Same as before.
    *
-   * @return bool
+   * @return null|false
    */
   static function skipCurly(array $tokens, &$i) {
     $iStart = $i;
