@@ -4,6 +4,7 @@ namespace Donquixote\HastyPhpParser\PhpToAst;
 
 use Donquixote\HastyPhpAst\Ast\File\AstFileInterface;
 use Donquixote\HastyPhpAst\PhpToAst\PhpToAstInterface;
+use Donquixote\HastyPhpParser\Exception\ParseError;
 use Donquixote\HastyPhpParser\Parser\PtkParser_File;
 use Donquixote\HastyPhpParser\Parser\PtkParserInterface;
 
@@ -42,7 +43,13 @@ class PhpToAst_Parser implements PhpToAstInterface {
     $tokens[] = '#';
     $i = 0;
 
-    $fileAst = $this->parser->parse($tokens, $i);
+    try {
+      $fileAst = $this->parser->parse($tokens, $i);
+    }
+    catch (ParseError $e) {
+      return NULL;
+    }
+
     if (!$fileAst instanceof AstFileInterface) {
       return NULL;
     }
