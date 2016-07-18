@@ -22,6 +22,9 @@ class PhpToAstTest extends \PHPUnit_Framework_TestCase {
     $php = file_get_contents($file);
     $fileAst = $phpToAst->phpGetAst($php);
 
+    static::assertNotNull($fileAst);
+    static::assertInstanceOf(AstFileInterface::class, $fileAst);
+
     $classNodes = $this->fileAstGetClassNodes($fileAst);
 
     $this->assertEquals(array(0), array_keys($classNodes));
