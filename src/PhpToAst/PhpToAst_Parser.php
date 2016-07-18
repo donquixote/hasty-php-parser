@@ -34,7 +34,7 @@ class PhpToAst_Parser implements PhpToAstInterface {
    * @param string $php
    *   PHP code read from a file.
    *
-   * @return \Donquixote\HastyPhpAst\Ast\File\AstFileInterface
+   * @return \Donquixote\HastyPhpAst\Ast\File\AstFileInterface|null
    */
   function phpGetAst($php) {
 
